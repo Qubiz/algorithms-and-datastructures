@@ -1,0 +1,61 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 26,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "common",
+      "description": "Common settings that apply to all configurations",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "CPM_SOURCE_CACHE": "${sourceDir}/out/cpm"
+      }
+    },
+    {
+      "name": "debug",
+      "description": "Debug build",
+      "inherits": [
+        "common"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "release",
+      "description": "Release build",
+      "inherits": [
+        "common"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "release",
+      "description": "Build the project",
+      "configurePreset": "release"
+    },
+    {
+      "name": "debug",
+      "description": "Build the project",
+      "configurePreset": "debug"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "test-release",
+      "displayName": "CTest release",
+      "description": "Run tests",
+      "configurePreset": "release"
+    }
+  ]
+}
